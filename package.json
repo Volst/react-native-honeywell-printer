@@ -1,0 +1,22 @@
+{
+  "name": "react-native-honeywell-printer",
+  "description": "A barcode scanner for Honeywell handheld devices like Honeywell Dolphin CT50",
+  "version": "1.0.1",
+  "main": "index.js",
+  "author": "Kees Kluskens <kees@volst.nl>",
+  "repository": "Volst/react-native-honeywell-printer",
+  "keywords": [
+    "honeywell",
+    "barcode",
+    "scanner"
+  ],
+  "engines": {
+    "node": ">=4.0"
+  },
+  "files": [
+    "android",
+    "index.js"
+  ],
+  "license": "ISC",
+  "private": false
+}
