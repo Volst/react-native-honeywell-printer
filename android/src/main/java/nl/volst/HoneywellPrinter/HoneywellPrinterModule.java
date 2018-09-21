@@ -29,36 +29,36 @@ import com.honeywell.mobility.print.PrintProgressListener;
 @SuppressWarnings("unused")
 public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 
-    // Debugging
-    private static final boolean D = true;
+	// Debugging
+	private static final boolean D = true;
 
-    private ReactApplicationContext mReactContext;
+	private ReactApplicationContext mReactContext;
 
-    public HoneywellPrinterModule(ReactApplicationContext reactContext) {
-        super(reactContext);
+	public HoneywellPrinterModule(ReactApplicationContext reactContext) {
+		super(reactContext);
 
-        mReactContext = reactContext;
-    }
+		mReactContext = reactContext;
+	}
 
-    @Override
-    public String getName() {
-        return "HoneywellPrinter";
-    }
+	@Override
+	public String getName() {
+		return "HoneywellPrinter";
+	}
 
-    /*******************************/
-    /** Methods Available from JS **/
-    /*******************************/
+	/*******************************/
+	/** Methods Available from JS **/
+	/*******************************/
 
-    @ReactMethod
-    public void print(String printerID, String macAddress, String text, final Promise promise) {
-        // Create a PrintTask to do printing on a separate thread.
+	@ReactMethod
+	public void print(String printerID, String macAddress, String text, final Promise promise) {
+		// Create a PrintTask to do printing on a separate thread.
 		PrintTask task = new PrintTask();
 
 		// Executes PrintTask with the specified parameter which is passed
 		// to the PrintTask.doInBackground method.
 		task.execute(printerID, macAddress, text);
 		promise.resolve(true);
-    }
+	}
 
 
 	/**
@@ -73,7 +73,7 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 		@Override
 		protected void onPreExecute()
 		{
-            //
+			//
 		}
 
 		/**
@@ -97,7 +97,7 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 			} catch (IOException e) {
 				if (D) Log.d(TAG, "HONEYWELLPRINTER - FILE ERR " + e.getMessage());
 			}
-			String profiles = new String(buffer);
+			String profiles = new String(buffer).trim();
 
 			LabelPrinter lp = null;
 			String sResult = null;
@@ -105,8 +105,8 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 			String sPrinterURI = "bt://" + args[1];
 			String sText = args[2];
 			if (D) Log.d(TAG, "HONEYWELLPRINTER - PRINTER ID " + sPrinterID);
-            if (D) Log.d(TAG, "HONEYWELLPRINTER - PRINTER URI " + sPrinterURI);
-            if (D) Log.d(TAG, "HONEYWELLPRINTER - PRINTER TEXT " + sText);
+			if (D) Log.d(TAG, "HONEYWELLPRINTER - PRINTER URI " + sPrinterURI);
+			if (D) Log.d(TAG, "HONEYWELLPRINTER - PRINTER TEXT " + sText);
 
 			LabelPrinter.ExtraSettings exSettings = new LabelPrinter.ExtraSettings();
 			exSettings.setContext(mReactContext);
@@ -116,7 +116,7 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 			try
 			{
 				lp = new LabelPrinter(
-                        profiles,
+						profiles,
 						sPrinterID,
 						sPrinterURI,
 						exSettings);
@@ -199,7 +199,7 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 		@Override
 		protected void onProgressUpdate(Integer... values)
 		{
-            // TODO
+			// TODO
 		}
 
 		/**

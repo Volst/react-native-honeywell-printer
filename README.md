@@ -2,6 +2,14 @@
 
 This package works with Honeywell devices that have an integrated barcode scanner, like the Honeywell Dolphin CT50. This package was fully tested with a CT50, since the SDK is not specific to the CT50 other devices will likely work as well but this is not guaranteed.
 
+TODO:
+
+- Find out how printerprofiles.json works
+- Properly rotate text on PB50 printer
+- Make sure printer is stable
+- Cleanup printerprofiles
+- Write documentation
+
 ## Installation
 
 ```
