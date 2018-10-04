@@ -1,7 +1,7 @@
 {
   "name": "react-native-honeywell-printer",
   "description": "Print barcodes and text with a Honeywell Intermec printer with React Native",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "main": "index.js",
   "author": "Kees Kluskens <kees@volst.nl>",
   "repository": "Volst/react-native-honeywell-printer",
