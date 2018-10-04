@@ -1,0 +1,73 @@
+{
+    "LINEPRINTERCONTROL":
+    {
+      "FormatVersion": "1.0.0.0",
+      "Platform": "Android",
+      "DEFAULTS":
+      {
+        "BoldIsFont": true, "BoldOff": "[0x1b,0x77,!]", "BoldOn": "[0x1b,0x77,0x6D]",
+        "CompressDotsHigh": 12, "CompressIsFont": true, "CompressOff": "[0x1b,0x77,!]",
+        "CompressOn": "[0x1b,0x77,0x42]", "DoubleHighDotsHigh": 32, "DoubleHighIsFont": false,
+        "DoubleHighMask": 16, "DoubleHighOff": "[0x1b,!,0x10]", "DoubleHighOn": "[0x1b,!,0x10]",
+        "DoubleWideDotsHigh": 16, "DoubleWideHighPrefix": "[0x1b,!]", "DoubleWideIsFont": false,
+        "DoubleWideMask": 32, "DoubleWideOff": "[0x1b,!,0x20]", "DoubleWideOn": "[0x1b,!,0x20]",
+        "Initialize": "[0x00,0x00,0x00,0x00,0x1b,0x40,0x00,0x00,0x00]",
+        "NormalFont": "[0x1b,0x77,!,0x1b,!,0x00]", "NewLine": "[0x0d]", "NormalDotsHigh": 16,
+        "FormFeed": "[0x0d,0x0d,0x0d,0x0d,0x0d]", "ValidateAttribOnFormFeed": true,
+        "PrintHeadWidth": 384, "UseDoubleHWMask": true, "ValidateAttribOnFont": true,
+        "ValidateAttribOnNewLn": true, "NullsBeforeClose": 0, "PreCloseDelay": 0, "EndOfGraphicsDelay": 0,
+        "PostGraphicsDelay": 0, "PostGraphicsLineDelay": 0, "PreGraphicsDelay": 0, "StartOfGraphicsDelay": 0,
+        "BtConnectRetries" : 3, "BtconnectRetryDelay" : 100, "BtWriteDataReadyTimeout" : 10000, "BtWriteIntervalTimeout" : 10000,
+        "BtMaxSegWrite" : 1024, "BtMaxSegRead" : 1024, "BtLinger" : 10
+      },
+  
+      "PRINTERS":
+      {
+        "PB32_Fingerprint":
+        {
+          "DisplayName":"PB32 Bt Label Printer", "PrintHeadWidth": 576, "LABEL_01": "3in_FingerprintLabels",
+          "FormFeed": "[0x46,0x4F,0x52,0x4D,0x46,0x45,0x45,0x44]",
+          "Initialize": [], "NormalFont": [], "NullsBeforeClose": 0, "PreCloseDelay": 1000
+        }
+      },
+  
+      "LABELS":
+      {
+        "3in_FingerprintLabels":
+        {
+          "ItemLabel":
+          {
+              "LabelDataStream": "PRPOS 200,0:DIR 1:AN 5:PP 180, 180:FT \"Swiss 721 Bold Condensed BT\",20:PT \"TextMsg$$\":PF\r\n",
+              "VarPostfix": "$$"
+          }
+        }
+      },
+      "STATUS":
+      {
+        "ESCP_StatusQueries" :
+        {
+          "QUERIES" :
+          [
+            {
+              "GetStatusCommand" : "[0x1b,{,S,T,?,}]",
+              "StatusInitTimeout" : 5000,
+              "StatusGapTimeout" : 500,
+              "StatusEndResponse" : "[}]",
+              "RESPONSES" :
+              [
+                { "PrinterMsg" : "[P,:,N]", "MsgNo" : 223 },
+                { "PrinterMsg" : "[B,:,V]", "MsgNo" : 226 },
+                { "PrinterMsg" : "[L,:,U]", "MsgNo" : 227 },
+                { "PrinterMsg" : "[H,:,T]", "MsgNo" : 228 },
+                { "PrinterMsg" : "[E,:,c]", "MsgNo" : 1001 },
+                { "PrinterMsg" : "[E,:,d]", "MsgNo" : 1002 },
+                { "PrinterMsg" : "[E,:,f]", "MsgNo" : 1003 },
+                { "PrinterMsg" : "[E,:,g]", "MsgNo" : 1004 }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+  

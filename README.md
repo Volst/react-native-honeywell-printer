@@ -1,73 +1,46 @@
-# React Native Honeywell Scanner
+# React Native Honeywell Printer
 
-This package works with Honeywell devices that have an integrated barcode scanner, like the Honeywell Dolphin CT50. This package was fully tested with a CT50, since the SDK is not specific to the CT50 other devices will likely work as well but this is not guaranteed.
+This package works with Honeywell devices that use the Intermec PB50 printer. It may also work on other Intermec printers, but this is not guaranteed.
 
-TODO:
+Note that this is an experimental package.
 
-- Find out how printerprofiles.json works
-- Properly rotate text on PB50 printer
-- Make sure printer is stable
-- Cleanup printerprofiles
-- Write documentation
+Tested to work with React Native 0.56 and 0.57. Only works on Android.
 
 ## Installation
 
 ```
-yarn add react-native-honeywell-scanner
+yarn add react-native-honeywell-printer
 ```
 
 To install the native dependencies:
 
 ```
-react-native link react-native-honeywell-scanner
+react-native link react-native-honeywell-printer
 ```
 
 ## Usage
 
-First you'll want to check whether the device is a Honeywell scanner:
+First you need to copy `printerprofiles.json` from this repository to `android/app/src/main/assets/printerprofiles.json` in your project. You can modify this file to change the styling of the print document.
 
 ```js
-import HoneywellPrinter from 'react-native-honeywell-scanner';
+import honeywellPrinter from 'react-native-honeywell-printer';
 
-HoneywellPrinter.isCompatible // true or false
-```
-
-The barcode reader needs to be "claimed" by your application; meanwhile no other application can use it. You can do that like this:
-
-```js
-HoneywellPrinter.startReader().then((claimed) => {
-    console.log(claimed ? 'Barcode reader is claimed' : 'Barcode reader is busy');
-});
-```
-
-To free the claim and stop the reader, also freeing up resources:
-
-```js
-HoneywellPrinter.stopReader().then(() => {
-    console.log('Freedom!');
-});
-```
-
-To get events from the barcode scanner:
-
-```js
-HoneywellPrinter.on('barcodeReadSuccess', event => {
-    console.log('Received data', event);
-});
-
-HoneywellPrinter.on('barcodeReadFail', () => {
-    console.log('Barcode read failed');
-});
-```
-
-To stop receiving events:
-
-```js
-function barcodeReadFail = () => console.log('Barcode read failed');
-HoneywellPrinter.off('barcodeReadFail', handler);
+async function print() {
+    const devices = await BluetoothSerial.list();
+    // Search for Intermec PB50 devices; this is the only tested printer at the moment.
+    const device = devices.find(device => device.name.includes('PB50'));
+    if (device) {
+        // This is the profile name defined in android/app/src/main/assets/printerprofiles.json
+        const profileName = 'PB32_Fingerprint';
+        await honeywellPrinter.print(profileName, device.id, 'My variable to print');
+    }
+}
 ```
 
 
-## Inspiration
+## TODO
 
-The [react-native-bluetooth-serial](https://github.com/rusel1989/react-native-bluetooth-serial) project was used as inspiration. [cordova-honeywell](https://github.com/icsfl/cordova-honeywell) also served as some inspiration.
+- There is no progress indication
+- There is no indication whether printing succeeded or failed
+
+We probably won't have time to build this since we'll only have a Intermec printer for a limited time.

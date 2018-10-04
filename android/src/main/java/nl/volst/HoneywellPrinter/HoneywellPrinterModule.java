@@ -76,7 +76,7 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 			//
 		}
 
-		/**
+		/**	
 		 * This method runs on a background thread. The specified parameters
 		 * are the parameters passed to the execute method by the caller of
 		 * this task. This method can call publishProgress to publish updates
@@ -95,7 +95,7 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 				stream.read(buffer);
 				stream.close();
 			} catch (IOException e) {
-				if (D) Log.d(TAG, "HONEYWELLPRINTER - FILE ERR " + e.getMessage());
+				if (D) Log.d(TAG, "Printer profile file error: " + e.getMessage());
 			}
 			String profiles = new String(buffer).trim();
 
@@ -104,14 +104,10 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 			String sPrinterID = args[0];
 			String sPrinterURI = "bt://" + args[1];
 			String sText = args[2];
-			if (D) Log.d(TAG, "HONEYWELLPRINTER - PRINTER ID " + sPrinterID);
-			if (D) Log.d(TAG, "HONEYWELLPRINTER - PRINTER URI " + sPrinterURI);
-			if (D) Log.d(TAG, "HONEYWELLPRINTER - PRINTER TEXT " + sText);
+			if (D) Log.d(TAG, "Printing to printer id " + sPrinterID + " with uri " + sPrinterURI + " and text " + sText);
 
 			LabelPrinter.ExtraSettings exSettings = new LabelPrinter.ExtraSettings();
 			exSettings.setContext(mReactContext);
-
-			if (D) Log.d(TAG, "HONEYWELLPRINTER - START BG THINGY");
 
 			try
 			{
@@ -151,7 +147,7 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 
 				// Sets up the variable dictionary.
 				LabelPrinter.VarDictionary varDataDict = new LabelPrinter.VarDictionary();
-				varDataDict.put("ItemName", sText);
+				varDataDict.put("TextMsg", sText);
 
 				// Prints the ItemLabel as defined in the printer_profiles.JSON file.
 				lp.writeLabel("ItemLabel", varDataDict);
@@ -186,7 +182,7 @@ public class HoneywellPrinterModule extends ReactContextBaseJavaModule {
 				}
 			}
 
-			if (D) Log.d(TAG, "HONEYWELLPRINTER -" + sResult);
+			if (D) Log.d(TAG, sResult);
 			// The result string will be passed to the onPostExecute method
 			// for display in the the Progress and Status text box.
 			return sResult;
