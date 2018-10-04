@@ -18,11 +18,14 @@ To install the native dependencies:
 react-native link react-native-honeywell-printer
 ```
 
+Unless you already know the Bluetooth MAC address of the printer, you need to use `react-native-bluetooth-serial` as well. Since it has an issue with recent versions of React Native, we use [this fork](https://github.com/jhonber/react-native-bluetooth-serial).
+
 ## Usage
 
 First you need to copy `printerprofiles.json` from this repository to `android/app/src/main/assets/printerprofiles.json` in your project. You can modify this file to change the styling of the print document.
 
 ```js
+import BluetoothSerial from 'react-native-bluetooth-serial';
 import honeywellPrinter from 'react-native-honeywell-printer';
 
 async function print() {
